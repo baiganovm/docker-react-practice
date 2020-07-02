@@ -1,10 +1,16 @@
 language: generic
 sudo: required
 services:
-  - docker
-
+- docker
 before_install:
-  - docker build -t docker-react-practice -f Dockerfile.dev .
-
+- docker build -t docker-react-practice -f Dockerfile.dev .
 script:
-  - docker run -e CI=true docker-react-practice npm run test
+- docker run -e CI=true docker-react-practice npm run test
+deploy:
+  provider: heroku
+  api_key:
+    secure: MDXuqH/G/xgeom4Fseqmjf+WqoV371Y5B6OKLn5KA/q+qGXuhtW11ui2DU4lBp3F53wiitKlUYDhbXa5zKZQYyjbRrirEHvUqIlCT3HLOJiDpa0FwSZ451eVFOJ2dzW2wWIX6w5lRitm0uDnG9TKhIpnLJ0T7X6BSXeu98JaPIVSH/bGAVPQNtiSAJ6jKIYMU9xih91jyHv9nP2T4wEcI17Z4UQ8LGDjikz/jh5FojLfeCxD46dmo0up2daknnobaHmnTcyQrBzq9w6l2MbTL3C/tQTdodkhSETYl1A6+jLGjyJiAMYm8G/im6+nvLVgsFVcqY3C4ERiWa9SEdbKbGTpvtxe+oSPNcv8RVbXXkQM+ab3trOhWGVnpOgOeKcFj1LOMgbhPeUrzp+eWmuPPIaaAhxpl3XEYgAuQ7qx7JQj5zP9+EwQNMq3S2n7KpHPQHj0Qdt0MgQ/SV5du17A1cJ/g8VIIFUcKzA4VTWG/+ng7OuC0PxUhfUP7SCE3tJhmNs2s+Xeq+e4kk7DfO2DL5VUVA/msmvx9PzTP2VCRddiXCzyo6nkC/rCns0KsWR64FmRt6zOlW65SCXbQyam7orvrOx62rk0Fyr/dt04Nq8/HS0Jgq1uotnIiBod+5z7cDAudW40nsZitDSV5TiQ6cRBKKxg0t8t9BsbYIUUm9s=
+  app: docker-react-practice
+  on:
+    repo: baiganovm/docker-react-practice
+  skip_cleanup: 'true'
